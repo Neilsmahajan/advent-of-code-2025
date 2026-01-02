@@ -66,15 +66,13 @@ func SolvePart1(input string) (int, error) {
 		switch rotation.direction {
 		case "L":
 			currentPosition -= Position(rotation.tics)
-			if currentPosition < 0 {
-				currentPosition += 100
+			if currentPosition <= 0 {
+				currentPosition += 100 * ((-currentPosition / 100) + 1)
 			}
 		case "R":
 			currentPosition += Position(rotation.tics)
-			if currentPosition >= 100 {
-				currentPosition -= 100
-			}
 		}
+		currentPosition = currentPosition % 100
 		if currentPosition == 0 {
 			zeroCount++
 		}
