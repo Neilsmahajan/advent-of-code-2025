@@ -113,6 +113,8 @@ go build -o bin/aoc ./cmd/aoc/main.go
 4. **Add to main.go**: Add the import and entry to the solutions map in `cmd/aoc/main.go`:
 
 ```go
+package main
+
 import (
     // ... existing imports
     "github.com/neilsmahajan/advent-of-code-2024/internal/days/dayXX"
@@ -148,6 +150,8 @@ The `internal/utils` package provides common functions:
 Example usage:
 
 ```go
+package dayXX
+
 import "github.com/neilsmahajan/advent-of-code-2024/internal/utils"
 
 func SolvePart1(input string) (int, error) {

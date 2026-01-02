@@ -45,7 +45,7 @@ func SolvePart1(input string) (int, error) {
 		}
 	}(file)
 
-	rotations := []Rotation{}
+	var rotations []Rotation
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -106,7 +106,7 @@ func SolvePart2(input string) (int, error) {
 		}
 	}(file)
 
-	rotations := []Rotation{}
+	var rotations []Rotation
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
