@@ -175,4 +175,15 @@ The project structure is already set up with template files for all 25 days. Eac
 
 ## Solutions
 
-- [ ] Day 1: Secret Entrance 
+- [x] Day 1: Secret Entrance
+- [ ] Day 2: Gift Shop
+- [ ] Day 3: Lobby
+- [ ] Day 4: Printing Department
+- [ ] Day 5: Cafeteria
+- [ ] Day 6: Trash Compactor
+- [ ] Day 7: Laboratories
+- [ ] Day 8: Playground
+- [ ] Day 9: Movie Theater
+- [ ] Day 10: Factory
+- [ ] Day 11: Reactor
+- [ ] Day 12: Christmas Tree Farm
