@@ -3,7 +3,9 @@ package day05
 import (
 	"bufio"
 	"fmt"
+	"math"
 	"os"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -90,6 +92,53 @@ func SolvePart1(input string) (int, error) {
 	return numberOfFreshIngredients, nil
 }
 
+func getTotalIngrediantRange(ingrediantRanges []IngrediantRange) IngrediantRange {
+	minimumIngrediant := math.MaxInt
+	maximumIngrediant := math.MinInt
+	for _, ingrediantRange := range ingrediantRanges {
+		if ingrediantRange.Start < minimumIngrediant {
+			minimumIngrediant = ingrediantRange.Start
+		}
+		if ingrediantRange.End > maximumIngrediant {
+			maximumIngrediant = ingrediantRange.End
+		}
+	}
+	return IngrediantRange{
+		Start: minimumIngrediant,
+		End:   maximumIngrediant,
+	}
+}
+
 func SolvePart2(input string) (int, error) {
-	return 0, nil
+	ingrediantRanges, _, err := parseRangesAndIngredientIDs(input)
+	if err != nil {
+		return 0, err
+	}
+
+	sort.Slice(ingrediantRanges, func(i, j int) bool {
+		if ingrediantRanges[i].Start == ingrediantRanges[j].Start {
+			return ingrediantRanges[i].End < ingrediantRanges[j].End
+		}
+		return ingrediantRanges[i].Start < ingrediantRanges[j].Start
+	})
+
+	numberOfFreshIngredients := 0
+	currentStart := ingrediantRanges[0].Start
+	currentEnd := ingrediantRanges[0].End
+
+	for _, ingrediantRange := range ingrediantRanges {
+		if ingrediantRange.Start <= currentEnd+1 {
+			if ingrediantRange.End > currentEnd {
+				currentEnd = ingrediantRange.End
+			}
+		} else {
+			numberOfFreshIngredients += currentEnd - currentStart + 1
+			currentStart = ingrediantRange.Start
+			currentEnd = ingrediantRange.End
+		}
+	}
+
+	numberOfFreshIngredients += currentEnd - currentStart + 1
+
+	return numberOfFreshIngredients, nil
 }
