@@ -180,7 +180,7 @@ The project structure is already set up with template files for all 25 days. Eac
 ## Solutions
 
 - [x] Day 1: Secret Entrance
-- [ ] Day 2: Gift Shop
+- [x] Day 2: Gift Shop
 - [ ] Day 3: Lobby
 - [ ] Day 4: Printing Department
 - [ ] Day 5: Cafeteria
