@@ -3,6 +3,8 @@ package day03
 import (
 	"bufio"
 	"os"
+	"strconv"
+	"strings"
 )
 
 func parseBanks(inputFile string) ([][]int, error) {
@@ -57,6 +59,45 @@ func SolvePart1(input string) (int, error) {
 	return totalJolts, nil
 }
 
+func sliceToInt(slice []int) (int, error) {
+	stringSlice := make([]string, len(slice))
+	for index, value := range slice {
+		stringSlice[index] = strconv.Itoa(value)
+	}
+	combinedString := strings.Join(stringSlice, "")
+	result, err := strconv.Atoi(combinedString)
+	if err != nil {
+		return 0, err
+	}
+	return result, nil
+}
+
 func SolvePart2(input string) (int, error) {
-	return 0, nil
+	banks, err := parseBanks(input)
+	if err != nil {
+		return 0, err
+	}
+
+	totalJolts := 0
+	for _, bank := range banks {
+		k := len(bank) - 12
+		var stack []int
+		for _, jolt := range bank {
+			for k > 0 && len(stack) > 0 && jolt > stack[len(stack)-1] {
+				stack = stack[:len(stack)-1]
+				k--
+			}
+			stack = append(stack, jolt)
+		}
+		for k > 0 {
+			stack = stack[:len(stack)-1]
+			k--
+		}
+		maxJoltsInBank, err := sliceToInt(stack)
+		if err != nil {
+			return 0, err
+		}
+		totalJolts += maxJoltsInBank
+	}
+	return totalJolts, nil
 }
