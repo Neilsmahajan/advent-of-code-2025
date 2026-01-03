@@ -81,6 +81,35 @@ func SolvePart1(input string) (int, error) {
 	return accessableRollCount, nil
 }
 
+func updateGrid(grid Grid) (Grid, int) {
+	updatedGrid := grid
+	accessableRollCount := 0
+	for y, row := range grid {
+		for x, _ := range row {
+			point := Point{x, y}
+			if grid[y][x] == '@' && isRollAccessable(grid, point) {
+				accessableRollCount++
+				updatedGrid[y][x] = '.'
+			}
+		}
+	}
+	return updatedGrid, accessableRollCount
+}
+
 func SolvePart2(input string) (int, error) {
-	return 0, nil
+	grid, err := parseGrid(input)
+	if err != nil {
+		return 0, err
+	}
+	accessableTotalRollCount := 0
+	for {
+		var accessableRollCount int
+		grid, accessableRollCount = updateGrid(grid)
+		if accessableRollCount == 0 {
+			break
+		}
+		accessableTotalRollCount += accessableRollCount
+	}
+
+	return accessableTotalRollCount, nil
 }
